@@ -1,0 +1,168 @@
+{
+  "checkedOn": "2026-10-30",
+  "currency": "USD",
+  "disclaimer": "Editable planning estimates from the linked public API price pages, checked on 30 October 2026. Rates, availability and billing rules may change. App subscriptions, taxes, storage, local compute, electricity and labour are excluded. Image output rates may exclude input, thinking and other token charges. A zero API rate does not mean a production has no cost.",
+  "providers": [
+    {
+      "id": "local-planning",
+      "category": "planning",
+      "provider": "Existing material",
+      "model": "Your notes or an existing brief",
+      "route": "existing",
+      "inputPerMillion": 0,
+      "outputPerMillion": 0,
+      "source": "https://github.com/auraofintelligence/infinity-engine",
+      "note": "Reusing notes without making an API call adds no planning API charge. Time, local tools and any existing subscriptions are outside this estimate."
+    },
+    {
+      "id": "gemini-flash-lite",
+      "category": "planning",
+      "provider": "Google",
+      "model": "Gemini 3.5 Flash-Lite",
+      "route": "direct",
+      "inputPerMillion": 0.3,
+      "outputPerMillion": 2.5,
+      "source": "https://ai.google.dev/gemini-api/docs/pricing",
+      "note": "Standard paid tier. Output includes thinking tokens. Grounding, caching and other tools can add charges."
+    },
+    {
+      "id": "claude-sonnet",
+      "category": "planning",
+      "provider": "Anthropic",
+      "model": "Claude Sonnet 5.5",
+      "route": "direct",
+      "inputPerMillion": 2,
+      "outputPerMillion": 10,
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "note": "Base token rates. Cache writes, tool use and some execution features have separate prices."
+    },
+    {
+      "id": "local-transcription",
+      "category": "transcription",
+      "provider": "Local / existing",
+      "model": "Existing transcript or local transcription",
+      "route": "local",
+      "perAudioMinute": 0,
+      "source": "https://github.com/openai/whisper",
+      "note": "An existing transcript or a locally run transcription tool can avoid a hosted transcription API charge. Installation, hardware, electricity, time and transcript checking remain separate."
+    },
+    {
+      "id": "deepgram-nova3",
+      "category": "transcription",
+      "provider": "Deepgram",
+      "model": "Nova-3 Monolingual",
+      "route": "direct",
+      "perAudioMinute": 0.0077,
+      "source": "https://deepgram.com/pricing",
+      "note": "Published pay-as-you-go rate, billed per second. Multichannel duration and optional add-ons can increase the bill."
+    },
+    {
+      "id": "elevenlabs-scribe",
+      "category": "transcription",
+      "provider": "ElevenLabs",
+      "model": "Scribe v2",
+      "route": "direct",
+      "perAudioMinute": 0.0036666666666666666,
+      "publishedRate": 0.22,
+      "publishedUnit": "audio hour",
+      "source": "https://elevenlabs.io/pricing/api",
+      "note": "API rate of $0.22 per audio hour, converted here to minutes. Keyterm prompting and transcript editing are separately priced."
+    },
+    {
+      "id": "existing-images",
+      "category": "image",
+      "provider": "Existing material",
+      "model": "Your existing artwork or photographs",
+      "route": "existing",
+      "perImage": 0,
+      "source": "https://github.com/auraofintelligence/500-Queens-VC-2026",
+      "note": "Reusing suitable existing imagery adds no image-generation API charge. Asset permissions, preparation and editing time still need consideration."
+    },
+    {
+      "id": "gemini-flash-image",
+      "category": "image",
+      "provider": "Google",
+      "model": "Gemini 3.1 Flash Image",
+      "route": "direct",
+      "perImage": 0.067,
+      "outputOnly": true,
+      "resolution": "1K",
+      "source": "https://ai.google.dev/gemini-api/docs/pricing",
+      "note": "Output-image component only at 1K. Text/image inputs cost $0.50 per million tokens; text/thinking output costs $3 per million. These extra charges are not captured by the image-count line. Larger outputs cost more."
+    },
+    {
+      "id": "bfl-flux11-pro",
+      "category": "image",
+      "provider": "Black Forest Labs",
+      "model": "FLUX1.1 [pro]",
+      "route": "direct",
+      "perImage": 0.04,
+      "source": "https://help.bfl.ai/articles/7986977817-what-are-the-costs-associated-with-using-your-models",
+      "note": "Legacy model listed in the official price guide at four credits per image; one credit equals $0.01. Check endpoint availability before selecting it."
+    },
+    {
+      "id": "own-voice",
+      "category": "speech",
+      "provider": "Your recording",
+      "model": "Record your own narration",
+      "route": "existing",
+      "perThousandCharacters": 0,
+      "source": "https://github.com/auraofintelligence/davinci-resolve-automations",
+      "note": "Recording your own voice adds no synthetic-speech API charge. Recording equipment, performance, editing and your time are separate costs."
+    },
+    {
+      "id": "google-wavenet",
+      "category": "speech",
+      "provider": "Google Cloud",
+      "model": "WaveNet",
+      "route": "direct",
+      "perThousandCharacters": 0.004,
+      "source": "https://cloud.google.com/text-to-speech/pricing",
+      "note": "Legacy voice tier, equivalent to $4 per million characters after any eligible allowance. Count spaces and relevant markup. This estimate does not apply free allowances."
+    },
+    {
+      "id": "elevenlabs-flash",
+      "category": "speech",
+      "provider": "ElevenLabs",
+      "model": "Flash / Turbo",
+      "route": "direct",
+      "perThousandCharacters": 0.04,
+      "source": "https://elevenlabs.io/pricing/api",
+      "note": "API price excluding taxes. Voice availability and the permissions needed for the intended use still need checking."
+    },
+    {
+      "id": "own-footage",
+      "category": "video",
+      "provider": "Local / existing",
+      "model": "Your footage or a local Blender scene",
+      "route": "local",
+      "perGeneratedSecond": 0,
+      "source": "https://www.blender.org/",
+      "note": "Existing footage or a locally rendered Blender scene avoids a hosted video-generation API charge. Hardware, electricity, render time, asset permissions and labour are outside this estimate."
+    },
+    {
+      "id": "runway-veo-fast",
+      "category": "video",
+      "provider": "Runway",
+      "model": "Google Veo 3.1 Fast",
+      "route": "gateway",
+      "perGeneratedSecond": 0.15,
+      "withoutAudioPerSecond": 0.1,
+      "resolution": "720p or 1080p",
+      "source": "https://dev.runwayml.com/learn/veo-3-1-api",
+      "note": "Rate with generated audio; one Runway credit equals $0.01. Audio defaults on. Some failed tasks can still be charged. Use all billable generated seconds, including alternative takes."
+    },
+    {
+      "id": "fal-veo-fast",
+      "category": "video",
+      "provider": "fal",
+      "model": "Google Veo 3.1 Fast",
+      "route": "gateway",
+      "perGeneratedSecond": 0.15,
+      "withoutAudioPerSecond": 0.1,
+      "resolution": "720p or 1080p",
+      "source": "https://fal.ai/veo-3.1",
+      "note": "The same model through another host, with generated audio. 4K uses different rates. Availability, terms and limits can differ between hosts."
+    }
+  ]
+}

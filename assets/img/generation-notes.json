@@ -1,0 +1,34 @@
+{
+  "created_on": "2026-10-30",
+  "timezone": "Australia/Brisbane",
+  "tool": "built-in image_gen",
+  "purpose": "Original concept artwork for the Infinity Creative Workshop training website",
+  "disclosure": "Generated concept artwork. These scenes do not document real facilities, people, council meetings or tested production results.",
+  "processing": "Original PNGs preserved. WebP copies use Lanczos sizing and quality 85, method 6. The hero was resized from 1774 by 887 to 1920 by 960; other artwork was reduced from 1536 by 1024 to 1200 by 800.",
+  "images": [
+    {
+      "file": "hero-workshop.webp",
+      "original": "hero-workshop.png",
+      "width": 1920,
+      "height": 960,
+      "alt": "Generated concept of collaborators making music and video in a warm coastal studio with a luminous infinity sculpture",
+      "prompt": "Use case: stylized-concept. Asset type: panoramic website hero for a warm practical creative training workshop. Generate one new wide landscape image, approximately 2:1. Scene: a welcoming contemporary coastal creative studio with large open windows looking over lush subtropical island trees and bright turquoise ocean. A small group of adult collaborators make music, film and learning materials together. Right and centre hold a substantial timber editing desk, headphones and mixing controls, cameras, physical storyboard cards showing pictures without text, and a beautiful sculptural glowing infinity / horn-torus model. Monitor content is elegant abstract timeline shapes and motion graphics without readable text. Leave generous darker unobtrusive negative space at the left and lower-left for real website copy to be placed separately. Style: sophisticated cinematic editorial concept art with tactile realistic materials, natural human anatomy and hands, warm sunlight, joyful curiosity and thoughtful craft, creative abundance grounded in real making. Palette: cream, rich teal, warm coral, subtle lime accents and natural timber, with gentle deep shadow at left. Compose with dimensional depth and striking clear focal point. Constraints: no logos, no brand marks, no text, no pseudo writing, no typography, no watermark, no science fiction control room or holographic dashboard, no celebrity likenesses. This is an original concept artwork, not evidence of a real facility."
+    },
+    {
+      "file": "queens-council.webp",
+      "original": "queens-council.png",
+      "width": 1200,
+      "height": 800,
+      "alt": "Generated concept of five fictional adult Queen advisers discussing visual storyboards around a luminous infinity sculpture",
+      "prompt": "Use case: stylized-concept. Asset type: landscape editorial website artwork, approximately 3:2, for the Queens Council creative training pathway. Create an original scene of FIVE diverse adult fictional female archetypes collaborating around a circular timber table in a beautiful subtropical coastal creative studio. They are thoughtful, warm, confident and different from one another, with personal clothing in cream, terracotta coral, deep teal, rich blue and a subtle golden accent. They are actively comparing pictured storyboards and colour cards, one woman gently explaining a small luminous sculptural infinity / horn-torus model in the table centre, another listening and making a visual sketch. Real natural anatomy and hands, friendly constructive discussion, no stereotypes and no costumes claiming ceremonial or cultural authority. Ocean and subtropical greenery softly visible behind them. Sophisticated cinematic editorial concept art, tactile fabric, timber and paper, natural warm afternoon lighting, joyful responsible abundance expressed as imaginative people sharing tools and learning. Clear faces and interactions with dimensional depth. No celebrities, no logos, no readable text, no pseudo writing, no typography, no watermark, no holographic dashboard, no sci-fi control room, no formal corporate boardroom. This is a fictional AI council visual, not a photograph of real mentors."
+    },
+    {
+      "file": "spatial-storytelling.webp",
+      "original": "spatial-storytelling.png",
+      "width": 1200,
+      "height": 800,
+      "alt": "Generated concept of a camera filming a luminous infinity sculpture beside a video editing screen and picture storyboards",
+      "prompt": "Use case: stylized-concept. Asset type: landscape editorial website artwork approximately 3:2, illustrating spatial storytelling and a Blender-to-video-edit creative workflow without literal software logos or instructional labels. Scene: an intimate creative film studio on a sunny subtropical coast. One beautifully crafted luminous sculptural horn-torus / infinity shape in pearl ceramic with a soft golden inner light sits on a small professional tabletop set. A real compact cinema camera on a subtle motion-control slider films the sculpture from the left. Nearby on the right, an editing monitor shows an abstract teal and coral video timeline with no readable text and a preview of the same sculpture; picture-only storyboard cards and physical colour swatches lie on the timber desk below. Soft luminous cream backdrop, teal shadows, coral and lime accents, warm timber, plants and ocean light at the edge. Sophisticated cinematic editorial concept art, tactile believable materials and equipment, shallow depth and clear visual hierarchy. Convey a calm maker's workshop: a reusable 3D world becoming a carefully edited film. Not a cosmic scene, no people needed, no holographic dashboard, no celebrity likeness, no logos, no text, no pseudo writing, no labels, no watermark."
+    }
+  ]
+}
