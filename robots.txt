@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://infinity-creative-workshop.auraofintelligence.chatgpt.site/sitemap.xml
+Sitemap: https://auraofintelligence.github.io/infinity-creative-workshop/sitemap.xml

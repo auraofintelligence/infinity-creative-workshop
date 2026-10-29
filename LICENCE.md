@@ -21,7 +21,7 @@ If you use or adapt the work, give clear credit:
 
 > Based on infinity-creative-workshop by Luke Nathan Hayes / Strange But True /
 > Aura of Intelligence. Original project:
-> https://infinity-creative-workshop.auraofintelligence.chatgpt.site
+> https://github.com/auraofintelligence/infinity-creative-workshop
 
 ## 2. What You Cannot Do Without Permission
 

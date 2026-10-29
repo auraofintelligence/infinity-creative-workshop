@@ -14,7 +14,17 @@ npm test
 npm run preview
 ```
 
-Open the printed local address. Root HTML pages are generated from content/pages.mjs. The dist folder is the deployable static website. It can also be hosted under a GitHub Pages project path because internal links and assets are relative. Set SITE_URL before building for a different canonical origin.
+Open the printed local address. Root HTML pages are generated from content/pages.mjs. GitHub Pages serves the committed root HTML and assets from main. The dist folder is an additional static build copy. Internal links and assets are relative to support the GitHub Pages project path.
+
+## GitHub Pages
+
+GitHub Pages is the exclusive publication destination for this project.
+
+- Website: https://auraofintelligence.github.io/infinity-creative-workshop/
+- Repository: https://github.com/auraofintelligence/infinity-creative-workshop
+- Publishing source: main branch, root folder.
+- Before pushing a content change, run npm run build and npm test, then commit the regenerated HTML and asset data.
+- The validation workflow checks builds, tests and generated-file consistency. GitHub's native Pages deployment publishes the root folder.
 
 ## Maintain
 

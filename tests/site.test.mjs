@@ -62,5 +62,10 @@ test('deployable site includes metadata, data, licence and actual bitmap files',
   for(const p of ['index.html','robots.txt','sitemap.xml','LICENCE.md','.nojekyll','assets/rates.json','assets/queens.json'])assert.ok(fs.existsSync(path.join(dist,p)),p);
   const png=fs.readFileSync(path.join(dist,'assets/img/favicon-32.png'));assert.equal(png.subarray(0,8).toString('hex'),'89504e470d0a1a0a');
   const ico=fs.readFileSync(path.join(dist,'assets/img/favicon.ico'));assert.equal(ico.subarray(0,4).toString('hex'),'00000100');
-  const robots=fs.readFileSync(path.join(root,'robots.txt'),'utf8');assert.match(robots,/Sitemap: https:\/\/infinity-creative-workshop/);
+  const robots=fs.readFileSync(path.join(root,'robots.txt'),'utf8');assert.match(robots,/Sitemap: https:\/\/auraofintelligence\.github\.io\/infinity-creative-workshop\/sitemap\.xml/);
+  for(const file of pages){
+    const html=fs.readFileSync(path.join(root,file),'utf8');
+    assert.match(html,/rel="canonical" href="https:\/\/auraofintelligence\.github\.io\/infinity-creative-workshop\//,file);
+    assert.doesNotMatch(html,/chatgpt\.site/,file);
+  }
 });

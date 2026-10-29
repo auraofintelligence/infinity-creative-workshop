@@ -4,13 +4,13 @@ import { fileURLToPath } from 'node:url';
 import { createPages } from '../content/pages.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const base = (process.env.SITE_URL || 'https://infinity-creative-workshop.auraofintelligence.chatgpt.site').replace(/\/$/, '');
+const base = (process.env.SITE_URL || 'https://auraofintelligence.github.io/infinity-creative-workshop').replace(/\/$/, '');
 const read = p => JSON.parse(fs.readFileSync(path.join(root, p), 'utf8'));
 const queens = read('content/queens.json');
 const rates = read('content/rates.json');
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const nav = [['index.html','Home'],['learn.html','Learn'],['council.html','Council'],['production.html','Make'],['costs.html','Costs'],['test-lab.html','Test lab'],['repositories.html','Connections']];
-const footer = [['https://auraofintelligence.github.io/infinity-engine/','Infinity Engine'],['https://auraofintelligence.github.io/500-Queens-VC-2026/','500 Queens'],['https://auraofintelligence.github.io/davinci-resolve-automations/','Resolve Automations'],['https://auraofintelligence.github.io/i-C-infinity-music-universe/','i C. infinity'],['https://github.com/nateherkai/herk-edit-kit','Herk Edit Kit'],['https://github.com/nateherkai/roast-room','Roast Room'],['about.html','About and licence'],['repositories.html','All source repositories']];
+const footer = [['https://auraofintelligence.github.io/infinity-engine/','Infinity Engine'],['https://auraofintelligence.github.io/500-Queens-VC-2026/','500 Queens'],['https://auraofintelligence.github.io/davinci-resolve-automations/','Resolve Automations'],['https://auraofintelligence.github.io/i-C-infinity-music-universe/','i C. infinity'],['https://github.com/nateherkai/herk-edit-kit','Herk Edit Kit'],['https://github.com/nateherkai/roast-room','Roast Room'],['https://github.com/auraofintelligence/infinity-creative-workshop','Website source'],['about.html','About and licence'],['repositories.html','All source repositories']];
 const pages = createPages(queens, rates);
 for (const p of pages) {
   const html = `<!doctype html>
