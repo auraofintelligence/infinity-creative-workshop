@@ -4,10 +4,13 @@
   "private": true,
   "type": "module",
   "description": "A practical training site for original music, learning films and the Queens Council.",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "node scripts/build.mjs",
     "test": "node --test tests/*.test.mjs",
-    "preview": "node scripts/serve.mjs"
+    "preview": "node scripts/serve.mjs",
+    "import:queens": "node scripts/import-queens.mjs"
   }
 }

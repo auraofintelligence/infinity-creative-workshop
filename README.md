@@ -30,6 +30,10 @@ GitHub Pages is the exclusive publication destination for this project.
 
 - content/pages.mjs: teaching content and page layouts.
 - content/queens.json: the 24 original archetypes, drawn from the existing 500 Queens project.
+- content/council-architecture.json: the two-stream mentorship and attributed original sources.
+- content/queen-workshop.mjs: distinct proposed film, music and learning applications for every Queen.
+- content/queen-pages.mjs: the full individual profiles and Pillar–Anchor pairing interface.
+- scripts/import-queens.mjs: validates identities against the original Queens_Venture roster and imports full profiles without truncating their questions, approach or sessions.
 - content/rates.json: USD API rates with units, sources and checked date.
 - assets/js/calculator.mjs: calculation logic without API calls.
 - assets/js/site.mjs: learning routes, panel selection, browser-local notes and cost interface.

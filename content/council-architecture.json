@@ -1,0 +1,17 @@
+{
+  "title": "The Council of Aura",
+  "sourceCheckedOn": "2026-10-30",
+  "principle": "A Civilisation Pillar for what you build, and a Cultural Anchor for identity, heritage and values.",
+  "streams": [
+    { "id": "pillar", "title": "Civilisation Pillars", "count": 12, "purpose": "Specialised practical domains: the knowledge, mechanisms and work involved in what you build." },
+    { "id": "cultural", "title": "Cultural Anchors", "count": 12, "purpose": "Distinct cultural and identity strands: belonging, values, memory and the relationships that give the work meaning." }
+  ],
+  "sources": [
+    { "id": "original-roster", "title": "Original Queens Venture architecture and 24-character roster", "url": "https://auraofintelligence.github.io/Queens_Venture/#queens", "supports": "Dual mentorship, the two streams, names, domains, original archetypes, gifts and colours." },
+    { "id": "mythic-api", "title": "Queens VC Global Scale Plan, section 5.4", "url": "https://auraofintelligence.github.io/500-Queens-VC-2026/source-document-08.html#read", "supports": "A mythic interface to specialist knowledge, integrated learning journeys, portfolio stewardship and a mutable community mythos." },
+    { "id": "specialist-agents", "title": "Global Operations, section 4.3", "url": "https://auraofintelligence.github.io/500-Queens-VC-2026/source-document-11.html#read", "supports": "Specialised agents, distinct knowledge foundations, the Aura of Intelligence and coordinated memory." },
+    { "id": "mentorship", "title": "500 Queens planning document, page 6", "url": "https://auraofintelligence.github.io/500-Queens-VC-2026/source-planning-document.html#source-page-6", "supports": "The twelve practical domains, twelve identity strands and participant development of the characters." },
+    { "id": "corrected-portrayal", "title": "Queen source and portrayal direction, 24 September 2026", "url": "https://github.com/auraofintelligence/500-Queens-VC-2026/blob/259c9a8a971e66926ef5f31d17d85dad0406ad04/docs/ai-queens-source-direction.md", "supports": "Distinct mythic mentor identities, cultural identities, individual colours and ageless adult archetypal portrayals." }
+  ],
+  "adaptation": "The original identities and existing enterprise sessions are preserved. Creative-film applications, workshop exercises and the pairing interface are proposed developments for this training site, rather than quotations from the original architecture."
+}

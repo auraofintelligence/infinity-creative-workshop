@@ -1,0 +1,55 @@
+export function resolveCouncil(queens,selection){
+  const byId=new Map(queens.map(q=>[q.id,q]));
+  const pillar=byId.get(selection.pillar),anchor=byId.get(selection.anchor);
+  if(!pillar||pillar.group!=='pillar')throw Error('Choose a Civilisation Pillar for the practical realm.');
+  if(!anchor||anchor.group!=='cultural')throw Error('Choose a Cultural Anchor for identity and values.');
+  const guestIds=[...new Set(selection.guests||[])].filter(id=>id!==pillar.id&&id!==anchor.id);
+  for(const id of guestIds)if(!byId.has(id))throw Error('A selected guest is not in the original council.');
+  if(guestIds.length+2>9)throw Error('Try up to nine selected Queens for this review.');
+  return {pillar,anchor,guests:guestIds.map(id=>byId.get(id)),coordinateWithAura:selection.coordinateWithAura!==false};
+}
+
+export function prepareCouncilBrief(queens,selection,brief){
+  const c=resolveCouncil(queens,selection);
+  if(!brief.decision?.trim())throw Error('Describe the creative choice you want to explore.');
+  const aura=queens.find(q=>q.id==='super-queen');
+  const profiles=[['Lead Civilisation Pillar',c.pillar],['Lead Cultural Anchor',c.anchor],...c.guests.map(q=>['Guest specialist',q])];
+  if(c.coordinateWithAura&&!profiles.some(([,q])=>q.id===aura.id))profiles.push(['Coordination, alignment and project memory',aura]);
+  const profileText=profiles.map(([role,q])=>`${role.toUpperCase()}: ${q.name}\nCouncil stream: ${q.group==='pillar'?'Civilisation Pillar':'Cultural Anchor'}\nOriginal realm: ${q.originalDomain}\nCultural identity: ${q.culturalIdentity}\nOriginal archetype: ${q.originalArchetype}\nOriginal gift: ${q.originalGift}\nVoice: ${q.voice}\n\nHer approach:\n${q.approach.join('\n\n')}\n\nQuestions from her existing profile:\n${q.questions.map((x,i)=>`${i+1}. ${x}`).join('\n')}\n\nProposed creative-workshop lens:\n${q.workshop.film}\n${q.workshop.learning}\nThe tension she brings: ${q.workshop.tension}\n\nQuestions for the creative work:\n${q.workshop.questions.map((x,i)=>`${i+1}. ${x}`).join('\n')}\n\nExisting working session: ${q.session.title}\n${q.session.steps.map((x,i)=>`${i+1}. ${x}`).join('\n')}\nResult to work towards: ${q.session.deliverable}\nReview: ${q.session.review}\n\nSource limits:\n${q.limits.map(x=>'- '+x).join('\n')}\nSource profile: ${q.source}\nOriginal council: https://auraofintelligence.github.io/Queens_Venture/#queens`).join('\n\n----------------------------------------\n\n');
+  return `COUNCIL OF AURA — PAIRED MENTORSHIP AND CREATIVE REVIEW\n\nThe original architecture pairs a Civilisation Pillar for what is being built with a Cultural Anchor for identity, heritage and values. Preserve their different gifts and knowledge foundations.\n\nDecision: ${brief.decision.trim()}\n\nOptions: ${brief.options?.trim()||'Help me identify two or three plausible options before reviewing.'}\n\nIdentity, place and values I choose to bring: ${brief.personalContext?.trim()||'Ask what context I want to share; do not infer my identity.'}\n\nPractical intentions and constraints: ${brief.constraints?.trim()||'Clarify the audience, meaning, time, assets and budget.'}\n\nCORE PAIR\nPillar: ${c.pillar.name} — ${c.pillar.originalDomain}\nAnchor: ${c.anchor.name} — ${c.anchor.originalDomain}\n${c.coordinateWithAura?'Aura is invited to connect purpose, evidence, disagreements and project memory. If she is also the chosen Pillar, distinguish her domain contribution from her coordination.':'Keep the two mentors’ contributions distinct and agree how to coordinate the conversation.'}\n\nTHE PROFILES\n\n${profileText}\n\nSUGGESTED SESSION\n1. Clarify the creative choice and any missing context.\n2. Let the Pillar develop the practical realm and the Anchor explore identity, values and relationships separately.\n3. Ask each invited specialist for a response grounded in her actual domain, not a generic yes/no vote.\n4. Discuss the strongest disagreement, alternative treatment and missing evidence.\n5. Offer a small scene, learning exercise or practical test, naming the expected observation.\n6. Record the human choice, unresolved views, sources and what changed in the project memory.\n7. If a character’s role or mythos needs to evolve, propose an amendment with its reason rather than silently replacing the original identity.\n\nThe original source described specialised CustomGPTs. This brief is portable to a chosen provider; actual specialist grounding still requires reviewed task-appropriate sources. The film and learning applications above are separately identified workshop developments. These are fictional mentors, distinct from the real 500 Queens participants. Keep evidence, creative proposals and actual contributor decisions recognisable. This brief does not authorise paid generation or private uploads.\n`;
+}
+
+export async function initCouncil({$, $$,readStore,saveStore,toast,download}){
+  if(!$('#council-form'))return;
+  const queens=await fetch('assets/queens.json').then(r=>{if(!r.ok)throw Error('Council profiles unavailable');return r.json()});
+  const byId=new Map(queens.map(q=>[q.id,q]));
+  const saved=readStore('infinity-workshop-council',{});
+  const pillarSelect=$('#lead-pillar'),anchorSelect=$('#lead-anchor'),coordinate=$('#coordinate-aura');
+  const guests=new Set((saved.guests||saved.selected||[]).filter(id=>byId.has(id)));
+  let prepared='';
+  const params=new URLSearchParams(location.search);
+  const initialPillar=params.get('pillar')||saved.pillar;
+  const initialAnchor=params.get('anchor')||saved.anchor;
+  if(byId.get(initialPillar)?.group==='pillar')pillarSelect.value=initialPillar;
+  if(byId.get(initialAnchor)?.group==='cultural')anchorSelect.value=initialAnchor;
+  coordinate.checked=saved.coordinateWithAura!==false;
+  for(const id of ['decision','options','constraints'])if(typeof saved[id]==='string')$('#'+id).value=saved[id];
+  if(typeof saved.personalContext==='string')$('#personal-context').value=saved.personalContext;
+  const selectedIds=()=>[...new Set([pillarSelect.value,anchorSelect.value,...guests].filter(Boolean))];
+  function addPairCard(q,label){const article=document.createElement('article');const eyebrow=document.createElement('p');eyebrow.className='eyebrow aqua';eyebrow.textContent=label;const h=document.createElement('h3');h.textContent=q.name;const p=document.createElement('p');p.textContent=q.originalGift;const a=document.createElement('a');a.href=`queen-${q.id}.html`;a.textContent='Explore her full profile ↗';article.append(eyebrow,h,p,a);return article;}
+  function update(){const ids=selectedIds();$$('[data-queen]').forEach(e=>e.checked=ids.includes(e.dataset.queen));$('#panel-count').textContent=`${ids.length} Queen${ids.length===1?'':'s'} selected${pillarSelect.value&&anchorSelect.value?' · a Pillar–Anchor pair with '+Math.max(0,ids.length-2)+' guest'+(ids.length-2===1?'':'s'):''}`;const box=$('#pairing-result');box.replaceChildren();const pillar=byId.get(pillarSelect.value),anchor=byId.get(anchorSelect.value);if(pillar)box.append(addPairCard(pillar,'What you build / Pillar'));if(anchor)box.append(addPairCard(anchor,'Identity and values / Anchor'));if(!pillar||!anchor){const p=document.createElement('p');p.textContent=!pillar&&!anchor?'Choose a practical Pillar and a Cultural Anchor to begin the paired mentorship.':`Choose the ${!pillar?'Civilisation Pillar':'Cultural Anchor'} to complete your pair.`;box.append(p)}if(coordinate.checked){const p=document.createElement('p');p.className='pairing-coordination';p.textContent='Aura can connect the session’s purpose, sources and memory.';box.append(p)}}
+  for(const select of [pillarSelect,anchorSelect])select.addEventListener('change',()=>{guests.delete(select.value);update()});
+  coordinate.addEventListener('change',update);
+  $$('[data-queen]').forEach(input=>input.addEventListener('change',()=>{const id=input.dataset.queen;if(input.checked){if(selectedIds().length>=9&&!selectedIds().includes(id)){input.checked=false;toast('Try up to nine selected Queens for this review.');return}const q=byId.get(id);if(q.group==='pillar'&&!pillarSelect.value)pillarSelect.value=id;else if(q.group==='cultural'&&!anchorSelect.value)anchorSelect.value=id;else guests.add(id)}else{if(pillarSelect.value===id)pillarSelect.value='';if(anchorSelect.value===id)anchorSelect.value='';guests.delete(id)}update()}));
+  const presets={music:{pillar:'dream-queen',anchor:'clover-queen',guests:['spark-queen','shield-queen','forge-queen']},education:{pillar:'forge-queen',anchor:'prism-queen',guests:['dream-queen','river-queen','lore-queen']},short:{pillar:'storm-queen',anchor:'pearl-queen',guests:['dream-queen','prism-queen','shield-queen']},enterprise:{pillar:'spark-queen',anchor:'lotus-queen',guests:['shield-queen','lore-queen','forge-queen']}};
+  $$('[data-panel]').forEach(button=>button.addEventListener('click',()=>{const p=presets[button.dataset.panel];pillarSelect.value=p?.pillar||'';anchorSelect.value=p?.anchor||'';guests.clear();p?.guests.forEach(id=>guests.add(id));$$('[data-panel]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));update()}));
+  $('#council-form').addEventListener('submit',event=>{event.preventDefault();const selection={pillar:pillarSelect.value,anchor:anchorSelect.value,guests:[...guests],coordinateWithAura:coordinate.checked};const brief={decision:$('#decision').value,options:$('#options').value,personalContext:$('#personal-context').value,constraints:$('#constraints').value};try{prepared=prepareCouncilBrief(queens,selection,brief);$('#council-output').textContent=prepared;const stored=saveStore('infinity-workshop-council',{...selection,...brief});toast(stored?'Paired review brief prepared and saved in this browser.':'Brief prepared. Save a copy because browser storage is unavailable.')}catch(e){toast(e.message);if(!pillarSelect.value)pillarSelect.focus();else if(!anchorSelect.value)anchorSelect.focus();else $('#decision').focus()}});
+  $('#copy-brief').addEventListener('click',async()=>{if(!prepared){toast('Prepare the paired review brief first.');return}try{await navigator.clipboard.writeText(prepared);toast('Review prompt copied.')}catch{toast('Select the prompt text to copy it.')}});
+  $('#download-brief').addEventListener('click',()=>prepared?download('council-of-aura-paired-review.txt',prepared):toast('Prepare the paired review brief first.'));
+  update();
+}
+
+export async function initQueenDownloads({$,toast,download}){
+  const button=$('[data-profile-download]');if(!button)return;
+  button.addEventListener('click',async()=>{try{const queens=await fetch('assets/queens.json').then(r=>{if(!r.ok)throw Error();return r.json()});const q=queens.find(q=>q.id===button.dataset.profileDownload);if(!q)throw Error();download(`${q.id}-full-profile.json`,JSON.stringify(q,null,2),'application/json');toast('Full source identity and workshop development saved.')}catch{toast('The profile could not load. Please refresh and try again.')}});
+}

@@ -8,7 +8,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const pages=fs.readdirSync(root).filter(p=>p.endsWith('.html'));
 
 test('all generated pages have accessible foundations and raster icons',()=>{
-  assert.equal(pages.length,9);
+  assert.equal(pages.length,33);
   for(const file of pages){
     const html=fs.readFileSync(path.join(root,file),'utf8');
     assert.match(html,/<html lang="en-AU">/,file);
@@ -27,7 +27,9 @@ test('internal links and local page assets resolve, including fragments',()=>{
     const html=fs.readFileSync(path.join(root,page),'utf8');
     for(const m of html.matchAll(/(?:href|src)="([^"]+)"/g)){
       const ref=m[1]; if(/^(https?:|data:|mailto:)/.test(ref))continue;
-      const [file,fragment]=ref.split('#');const target=path.resolve(root,file||page);
+      const url=new URL(ref,'https://local.example/'+page);
+      const file=decodeURIComponent(url.pathname).slice(1),fragment=decodeURIComponent(url.hash.slice(1));
+      const target=path.resolve(root,file||page);
       assert.ok(target.startsWith(root+path.sep),ref);
       assert.ok(fs.existsSync(target),`${page}: ${ref}`);
       if(fragment&&target.endsWith('.html')){
