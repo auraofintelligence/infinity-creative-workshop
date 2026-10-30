@@ -1,5 +1,6 @@
-import { initCouncil as initPairedCouncil, initQueenDownloads } from './council.mjs';
-import { calculateEstimate } from './calculator.mjs';
+const versionSuffix=new URL(import.meta.url).search;
+const { initCouncil:initPairedCouncil,initQueenDownloads }=await import('./council.mjs'+versionSuffix);
+const { calculateEstimate }=await import('./calculator.mjs'+versionSuffix);
 
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const escapeHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

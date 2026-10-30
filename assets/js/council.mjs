@@ -21,7 +21,7 @@ export function prepareCouncilBrief(queens,selection,brief){
 
 export async function initCouncil({$, $$,readStore,saveStore,toast,download}){
   if(!$('#council-form'))return;
-  const queens=await fetch('assets/queens.json').then(r=>{if(!r.ok)throw Error('Council profiles unavailable');return r.json()});
+  const queens=await fetch('assets/queens.json?v='+encodeURIComponent(document.body.dataset.contentVersion||'')).then(r=>{if(!r.ok)throw Error('Council profiles unavailable');return r.json()});
   const byId=new Map(queens.map(q=>[q.id,q]));
   const saved=readStore('infinity-workshop-council',{});
   const pillarSelect=$('#lead-pillar'),anchorSelect=$('#lead-anchor'),coordinate=$('#coordinate-aura');
@@ -51,5 +51,5 @@ export async function initCouncil({$, $$,readStore,saveStore,toast,download}){
 
 export async function initQueenDownloads({$,toast,download}){
   const button=$('[data-profile-download]');if(!button)return;
-  button.addEventListener('click',async()=>{try{const queens=await fetch('assets/queens.json').then(r=>{if(!r.ok)throw Error();return r.json()});const q=queens.find(q=>q.id===button.dataset.profileDownload);if(!q)throw Error();download(`${q.id}-full-profile.json`,JSON.stringify(q,null,2),'application/json');toast('Full source identity and workshop development saved.')}catch{toast('The profile could not load. Please refresh and try again.')}});
+  button.addEventListener('click',async()=>{try{const queens=await fetch('assets/queens.json?v='+encodeURIComponent(document.body.dataset.contentVersion||'')).then(r=>{if(!r.ok)throw Error();return r.json()});const q=queens.find(q=>q.id===button.dataset.profileDownload);if(!q)throw Error();download(`${q.id}-full-profile.json`,JSON.stringify(q,null,2),'application/json');toast('Full source identity and workshop development saved.')}catch{toast('The profile could not load. Please refresh and try again.')}});
 }
